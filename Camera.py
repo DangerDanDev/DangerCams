@@ -21,6 +21,12 @@ class Camera:
         """
         return self.__height
 
+    def set_width(self, width):
+        self.__width = width
+
+    def set_height(self, height):
+        self.__height = height
+
     def __init__(self, input_src):
 
         self.input_source = cv.VideoCapture(input_src)

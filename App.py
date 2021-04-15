@@ -2,6 +2,7 @@ import tkinter
 
 import PIL
 
+import CameraCanvas
 from Camera import Camera
 
 
@@ -20,7 +21,7 @@ class App:
         # Uncomment this to load a camera from the webcam on my laptop
         self.camera = Camera(0)
 
-        self.canvas = tkinter.Canvas(self.window, width=self.camera.get_width(), height=self.camera.get_height())
+        self.canvas = CameraCanvas.CameraCanvas(self.window, self.camera)
         self.canvas.pack()
 
         self.update()
@@ -28,10 +29,7 @@ class App:
 
     def update(self):
 
-         ret, self.photo = self.camera.get_photo_image()
+        self.canvas.update()
 
-         if ret:
-            self.canvas.create_image(0,0, image=self.photo, anchor=tkinter.NW)
-
-            self.window.after(self.delay, self.update)
+        self.window.after(self.delay, self.update)
 
