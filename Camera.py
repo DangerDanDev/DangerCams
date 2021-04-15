@@ -8,15 +8,15 @@ class Camera:
 
     def get_width(self):
         """
-        Width is assigned in the constructor
-        and should only be read from after that
-        :return:
+        The width of the frame that will be returned from self.get_frame() and associated methods. It is a good
+        idea to match this number to the size of the container displaying the video.
         """
         return self.__width
 
     def get_height(self):
         """
-        Returns the read-only (from outside) variable '__height'
+        The height of the frame that will be returned from self.get_height() and associated methods.
+        It is a good idea to match this number to the size of the container displaying the video.
         :return:
         """
         return self.__height
@@ -27,23 +27,33 @@ class Camera:
     def set_height(self, height):
         self.__height = height
 
-    def __init__(self, input_src):
-
+    def __init__(self, input_src, width=-1, height=-1):
+        
+        # Get a video capture opject from OpenCV
         self.input_source = cv.VideoCapture(input_src)
-
-        self.__width = self.input_source.get(cv.CAP_PROP_FRAME_WIDTH)
-        self.__height = self.input_source.get(cv.CAP_PROP_FRAME_HEIGHT)
+        
+        if width == -1:
+            self.set_width(self.input_source.get(cv.CAP_PROP_FRAME_WIDTH)
+        else:
+            self.set_width(width)
+                      
+        if height == -1:
+            self.set_height(self.input_source.get(cv.CAP_PROP_FRAME_HEIGHT)
+        else:
+            self.set_height(height)
 
     def __del__(self):
         self.input_source.release()
 
     def get_frame(self):
+        # Trying to do frame-work on an invalid stream is a bad idea. Best to just skip it
+        # So the rest of the program can work.
         if self.input_source.isOpened():
-
+            
             ret, frame = self.input_source.read()
-
+            
+            # We want to return the frame in the size I have been set to
             frame = cv.resize(frame, (int(self.__width), int(self.__height)))
-            print('Width: ', self.__width, 'Height: ', self.__height)
 
             if ret:
                 return ret, cv.cvtColor(frame, cv.COLOR_BGR2RGB)
