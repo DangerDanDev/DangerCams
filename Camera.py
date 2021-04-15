@@ -33,12 +33,12 @@ class Camera:
         self.input_source = cv.VideoCapture(input_src)
         
         if width == -1:
-            self.set_width(self.input_source.get(cv.CAP_PROP_FRAME_WIDTH)
+            self.set_width(self.input_source.get(cv.CAP_PROP_FRAME_WIDTH))
         else:
             self.set_width(width)
                       
         if height == -1:
-            self.set_height(self.input_source.get(cv.CAP_PROP_FRAME_HEIGHT)
+            self.set_height(self.input_source.get(cv.CAP_PROP_FRAME_HEIGHT))
         else:
             self.set_height(height)
 
