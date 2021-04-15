@@ -6,12 +6,27 @@ class Camera:
 
     input_source: cv.VideoCapture
 
+    def get_width(self):
+        """
+        Width is assigned in the constructor
+        and should only be read from after that
+        :return:
+        """
+        return self.__width
+
+    def get_height(self):
+        """
+        Returns the read-only (from outside) variable '__height'
+        :return:
+        """
+        return self.__height
+
     def __init__(self, input_src):
 
         self.input_source = cv.VideoCapture(input_src)
 
-        self.width = self.input_source.get(cv.CAP_PROP_FRAME_WIDTH)
-        self.height = self.input_source.get(cv.CAP_PROP_FRAME_HEIGHT)
+        self.__width = self.input_source.get(cv.CAP_PROP_FRAME_WIDTH)
+        self.__height = self.input_source.get(cv.CAP_PROP_FRAME_HEIGHT)
 
     def __del__(self):
         self.input_source.release()
