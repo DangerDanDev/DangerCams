@@ -16,7 +16,14 @@ class CameraCanvas(tkinter.Canvas):
         return self.__camera
 
     def __init__(self, master, camera: Camera, width=-1, height=-1):
-
+        """
+        :param master: My master widget, inherited from tkinter.Canvas.__init__()
+        :param camera: The camera feed whose video I display.
+        :param width: The width of this canvas. -1 means
+            leave the feed as is, any other value will set the width of the camera feed.
+        :param height: The height of this canvas. -1 Will leave the height as the size of the
+            camera feed, any other value will set it accordingly.
+        """
         if width == -1:
             width = camera.get_width()
         else:

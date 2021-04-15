@@ -20,9 +20,12 @@ class App:
 
         # Uncomment this to load a camera from the webcam on my laptop
         self.camera = Camera(0)
+        self.canvas = CameraCanvas.CameraCanvas(self.window, self.camera, width=133, height=100)
+        self.canvas.pack(side='top')
 
-        self.canvas = CameraCanvas.CameraCanvas(self.window, self.camera, 100, 125)
-        self.canvas.pack()
+        self.camera2 = Camera(1)
+        self.canvas2 = CameraCanvas.CameraCanvas(self.window, self.camera2, width=133, height=100)
+        self.canvas2.pack()
 
         self.update()
         self.window.mainloop()
@@ -30,6 +33,7 @@ class App:
     def update(self):
 
         self.canvas.update()
+        self.canvas2.update()
 
         self.window.after(self.delay, self.update)
 
