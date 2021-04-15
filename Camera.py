@@ -38,12 +38,15 @@ class Camera:
         self.input_source.release()
 
     def get_frame(self):
-        if(self.input_source.isOpened()):
+        if self.input_source.isOpened():
 
             ret, frame = self.input_source.read()
 
+            frame = cv.resize(frame, (int(self.__width), int(self.__height)))
+            print('Width: ', self.__width, 'Height: ', self.__height)
+
             if ret:
-                return ret, cv.cvtColor(frame,cv.COLOR_BGR2RGB)
+                return ret, cv.cvtColor(frame, cv.COLOR_BGR2RGB)
             else:
                 return ret, None
 

@@ -19,8 +19,13 @@ class CameraCanvas(tkinter.Canvas):
 
         if width == -1:
             width = camera.get_width()
+        else:
+            camera.set_width(width)
+
         if height == -1:
             height = camera.get_height()
+        else:
+            camera.set_height(height)
 
         # We still need to init as a regular canvas
         tkinter.Canvas.__init__(self, master=master, width=width, height=width)
@@ -34,8 +39,6 @@ class CameraCanvas(tkinter.Canvas):
 
         # Get the frame from the camera
         ret, self.__image = self.__camera.get_photo_image()
-
-        dimensions = (self.winfo_width(), self.winfo_height())
 
         if ret:
             self.create_image(0, 0, image=self.__image, anchor=tkinter.NW)

@@ -21,7 +21,7 @@ class App:
         # Uncomment this to load a camera from the webcam on my laptop
         self.camera = Camera(0)
 
-        self.canvas = CameraCanvas.CameraCanvas(self.window, self.camera)
+        self.canvas = CameraCanvas.CameraCanvas(self.window, self.camera, 100, 125)
         self.canvas.pack()
 
         self.update()
