@@ -47,7 +47,7 @@ class Camera:
     def __del__(self):
         self.input_source.release()
 
-    def get_frame(self) -> tuple(bool, numpy.ndarray):
+    def get_frame(self) -> (bool, numpy.ndarray):
         # Trying to do frame-work on an invalid stream is a bad idea. Best to just skip it
         # So the rest of the program can work.
         if self.input_source.isOpened():
@@ -66,11 +66,19 @@ class Camera:
 
     def get_photo_image(self) -> tuple[bool, PIL.ImageTk.PhotoImage]:
 
+        # Get the frame from cv.VideoInput
         ret, frame = self.get_frame()
 
+        # We only assign a value to this photo if a frame was successfully read
         photo = None
 
-        if ret:
+        # If a frame was read, convert it to a tkinter PhotoImage and assign it to variable photo
+        if ret and frame is not None:
             photo = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(frame))
 
+        # If there was no frame returned, set our success boolean to false
+        elif frame is None:
+            ret = False
+
+        # Return whether the operation succeeded and the photo, whether or not it is 'None'
         return ret, photo
