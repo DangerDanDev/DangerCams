@@ -51,7 +51,9 @@ class Camera:
         # Trying to do frame-work on an invalid stream is a bad idea. Best to just skip it
         # So the rest of the program can work.
         if self.input_source.isOpened():
-            
+
+            # Get the raw frame from the camera and a bool flag telling
+            # us if it was read correctly
             ret, frame = self.input_source.read()
 
             if ret:
