@@ -1,6 +1,8 @@
 import cv2 as cv
 import PIL.Image, PIL.ImageTk
 from typing import Union
+import typing
+import numpy
 
 class Camera:
 
@@ -45,17 +47,19 @@ class Camera:
     def __del__(self):
         self.input_source.release()
 
-    def get_frame(self):
+    def get_frame(self) -> tuple(bool, numpy.ndarray):
         # Trying to do frame-work on an invalid stream is a bad idea. Best to just skip it
         # So the rest of the program can work.
         if self.input_source.isOpened():
             
             ret, frame = self.input_source.read()
-            
-            # We want to return the frame in the size I have been set to
-            frame = cv.resize(frame, (int(self.__width), int(self.__height)))
 
             if ret:
+                # We want to return the frame in the size I have been set to
+                frame = cv.resize(frame, (int(self.__width), int(self.__height)))
+
+                print(type(frame))
+
                 return ret, cv.cvtColor(frame, cv.COLOR_BGR2RGB)
             else:
                 return ret, None
