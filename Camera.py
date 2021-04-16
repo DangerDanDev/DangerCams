@@ -58,8 +58,6 @@ class Camera:
                 # We want to return the frame in the size I have been set to
                 frame = cv.resize(frame, (int(self.__width), int(self.__height)))
 
-                print(type(frame))
-
                 return ret, cv.cvtColor(frame, cv.COLOR_BGR2RGB)
             else:
                 return ret, None
