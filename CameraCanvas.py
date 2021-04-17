@@ -44,6 +44,9 @@ class CameraCanvas(tkinter.Canvas):
         # Call this to ensure the widget's width and height are updated
         tkinter.Canvas.update(self)
 
+        self.get_camera().set_width(self.winfo_width())
+        self.get_camera().set_height(self.winfo_height())
+
         # Get the frame from the camera
         ret, self.__image = self.__camera.get_photo_image()
 
