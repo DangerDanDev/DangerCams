@@ -5,6 +5,7 @@ import PIL
 import CameraCanvas
 from Camera import Camera
 
+from ButtonWindow import ButtonWindow
 
 class App:
     window: tkinter.Tk = tkinter.Tk()
@@ -45,7 +46,11 @@ class App:
         self.window.grid_rowconfigure(2, weight=1)
 
         self.update()
+
+        self.buttonWindow = ButtonWindow(self.window.master)
         self.window.mainloop()
+
+
 
     def update(self):
 
