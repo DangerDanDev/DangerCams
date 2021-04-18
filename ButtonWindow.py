@@ -1,10 +1,11 @@
 import tkinter
 
+
 class ButtonWindow:
-    '''
+    """
     A window that displays a clickable button that triggers display cycling
-    on the main app window
-    '''
+    on the main app window. It is used to simulate the physical button in a testing environment
+    """
 
     __window: tkinter.Toplevel
 
