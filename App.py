@@ -11,11 +11,12 @@ class App:
 
     def __init__(self):
 
+        # The time between video frame updates (in milliseconds)
         self.delay = 5
 
         # Set the title and size of the window
         self.window.geometry('640x480')
-        self.window.title('Webcam test!')
+        self.window.title('DANGER Cams')
 
         self.cameras = list()
         self.camera_canvases = list()
