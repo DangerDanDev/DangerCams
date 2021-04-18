@@ -52,3 +52,4 @@ class CameraCanvas(tkinter.Canvas):
 
         if ret:
             self.create_image(0, 0, image=self.__image, anchor=tkinter.NW)
+

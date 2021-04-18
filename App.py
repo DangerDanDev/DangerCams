@@ -26,8 +26,7 @@ class App:
         y = 0
 
         for i in range(0,4):
-            self.cameras.append(Camera(r'C:\Users\scyth\Documents\Programming\PythonDemos\pexels-how-far-from-home-5592502.mp4'))
-            self.camera_canvases.append(CameraCanvas.CameraCanvas(self.window, self.cameras[i]))
+            self.add_camera(r'C:\Users\scyth\Documents\Programming\PythonDemos\pexels-how-far-from-home-5592502.mp4')
 
         # leftmost camera takes up the left third of the screen
         self.camera_canvases[0].grid(column=0, row=0, rowspan=2)
@@ -66,3 +65,7 @@ class App:
 
         self.window.after(self.delay, self.update)
 
+    def add_camera(self, camera_input: str):
+        camera = Camera(camera_input)
+        self.cameras.append(camera)
+        self.camera_canvases.append(CameraCanvas.CameraCanvas(self.window, camera))
