@@ -20,11 +20,6 @@ class App:
         self.cameras = list()
         self.camera_canvases = list()
 
-        width = 133
-        height = 100
-        x = 0
-        y = 0
-
         for i in range(0,4):
             self.add_camera(r'C:\Users\scyth\Documents\Programming\PythonDemos\pexels-how-far-from-home-5592502.mp4')
 
@@ -60,8 +55,6 @@ class App:
 
         for canvas in self.camera_canvases:
             canvas.update()
-
-        print(self.camera_canvases[0].winfo_width())
 
         self.window.after(self.delay, self.update)
 
