@@ -13,15 +13,23 @@ class SingleCameraState(State):
     def __init__(self, frame, source: str, width, height):
         State()
 
-        self.__camera = Camera(source, width=width, height=height)
+        self.__camera = Camera(input_src=source, width=width, height=height)
 
         self.source = source
 
     def enter_state(self, frame: tkinter.Frame):
+
+        # avoid throwing errors after the program closes
+        if not frame.winfo_exists():
+            return
+
         State.enter_state(self, frame)
 
         self.__canvas = CameraCanvas(frame, self.__camera, self.__camera.get_width(), self.__camera.get_height())
         self.__canvas.grid(column=0,row=0)
+
+
+
         self.update(frame)
 
     def update(self, frame: tkinter.Frame):

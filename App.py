@@ -7,7 +7,7 @@ from Camera import Camera
 
 from ButtonWindow import ButtonWindow
 from states.SingleCameraState import SingleCameraState
-from states.State import  State
+from states.State import State
 
 
 class App:
@@ -19,7 +19,10 @@ class App:
 
     __frame = tkinter.Frame(window, width=640, height=480)
 
+    # A list of each camera input screen
     __states = list()
+
+    # The camera input that is currently displayed
     __state_index = - 1
 
     def next_camera(self):
@@ -36,18 +39,24 @@ class App:
         self.window.grid_rowconfigure(0, weight=1)
         self.window.grid_columnconfigure(0, weight=1)
 
+        self.init_cameras()
+
         self.__frame.grid(row=0,column=0)
         self.__frame.grid_columnconfigure(0, weight=1)
         self.__frame.grid_rowconfigure(0, weight=1)
 
+        self.buttonWindow = ButtonWindow(self.window.master, btn_callback=self.next_state)
+        self.window.mainloop()
+
+    def init_cameras_no_webcam(self):
         self.__states.append(SingleCameraState(frame=self.__frame,source=r'C:\Users\scyth\Videos\video1.mp4',
                                         width = 640, height = 480))
 
         self.__states.append(SingleCameraState(frame=self.__frame, source=r'C:\Users\scyth\Videos\video2.mp4',
                                                width=640, height=480))
-
-        self.buttonWindow = ButtonWindow(self.window.master, btn_callback=self.next_state)
-        self.window.mainloop()
+    def init_cameras(self):
+        self.__states.append(SingleCameraState(frame=self.__frame, source=0, width=640, height=480))
+        self.__states.append(SingleCameraState(frame=self.__frame, source=1, width=640, height=480))
 
     def next_state(self):
 

@@ -45,6 +45,7 @@ class Camera:
             self.set_height(height)
 
     def __del__(self):
+        print('Deleting camera input stream')
         self.input_source.release()
 
     def get_frame(self) -> (bool, numpy.ndarray):
