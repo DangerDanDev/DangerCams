@@ -39,7 +39,8 @@ class App:
         self.__frame.grid_columnconfigure(0, weight=1)
         self.__frame.grid_rowconfigure(0, weight=1)
 
-        self.state = SingleCameraState(r'C:\Users\scyth\Pictures\image.png')
+        self.state = SingleCameraState(frame=self.__frame,source=r'C:\Users\scyth\Videos\ocean.mp4',
+                                        width=640, height = 480)
         self.state.enter_state(self.__frame)
 
         self.buttonWindow = ButtonWindow(self.window.master, btn_callback=self.next_camera)
