@@ -12,6 +12,7 @@ from states.State import State
 
 class App:
 
+    # Main app window
     window: tkinter.Tk = tkinter.Tk()
 
     # A list of camera manager states

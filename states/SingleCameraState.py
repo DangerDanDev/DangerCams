@@ -23,7 +23,12 @@ class SingleCameraState(State):
         if not frame.winfo_exists():
             return
 
+        #
         State.enter_state(self, frame)
+
+        # Turn on the reverse override to trigger the car's screen
+        # to show this display
+        self.override_on()
 
         self.__canvas = CameraCanvas(frame, self.__camera, self.__camera.get_width(), self.__camera.get_height())
         self.__canvas.grid(column=0,row=0)
