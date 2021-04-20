@@ -25,10 +25,10 @@ class SingleCameraState(State):
 
     def update(self, frame: tkinter.Frame):
         self.__canvas.update()
-        print('updating')
+
         frame.after(10, lambda: self.update(frame))
 
 
     def exit_state(self, frame: tkinter.Frame):
         State.exit_state(self, frame)
-        self.canvas.grid_forget()
+        self.__canvas.grid_forget()

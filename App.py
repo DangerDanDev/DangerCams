@@ -7,6 +7,7 @@ from Camera import Camera
 
 from ButtonWindow import ButtonWindow
 from states.SingleCameraState import SingleCameraState
+from states.State import  State
 
 
 class App:
@@ -19,6 +20,7 @@ class App:
     __frame = tkinter.Frame(window, width=640, height=480)
 
     __states = list()
+    __state_index = - 1
 
     def next_camera(self):
         self.state.enter_state(self.__frame)
@@ -39,41 +41,29 @@ class App:
         self.__frame.grid_columnconfigure(0, weight=1)
         self.__frame.grid_rowconfigure(0, weight=1)
 
-        self.state = SingleCameraState(frame=self.__frame,source=r'C:\Users\scyth\Videos\ocean.mp4',
-                                        width=640, height = 480)
-        self.state.enter_state(self.__frame)
+        self.__states.append(SingleCameraState(frame=self.__frame,source=r'C:\Users\scyth\Videos\video1.mp4',
+                                        width=640, height = 480))
 
-        self.buttonWindow = ButtonWindow(self.window.master, btn_callback=self.next_camera)
+        self.__states.append(SingleCameraState(frame=self.__frame, source=r'C:\Users\scyth\Videos\video2.mp4',
+                                               width=640, height=480))
+
+        self.buttonWindow = ButtonWindow(self.window.master, btn_callback=self.next_state)
         self.window.mainloop()
 
-    def config_4_cameras(self):
-        self.cameras = list()
-        self.camera_canvases = list()
+    def next_state(self):
 
-        for i in range(0,4):
-            self.add_camera(r'C:\Users\scyth\Documents\Programming\PythonDemos\pexels-how-far-from-home-5592502.mp4')
+        print('Going to next state')
 
-        # leftmost camera takes up the left third of the screen
-        self.camera_canvases[0].grid(column=0, row=0, rowspan=2)
+        # We only exit the old state if it is a valid state
+        if self.__state_index >= 0:
+            old_state: State = self.__states[self.__state_index]
+            old_state.exit_state(self.__frame)
 
-        # Middle 2 cameras split (top/bottom) the middle third of the screen
-        self.camera_canvases[1].grid(column=1, row=0)
-        self.camera_canvases[2].grid(column=1, row=1)
-
-        # The right camera takes the right third of the screen
-        self.camera_canvases[3].grid(column=2, row=0, rowspan=2)
-
-        # Configure all grid columns to grow proportionally with the window
-        self.window.grid_columnconfigure(0, weight=1)
-        self.window.grid_columnconfigure(1, weight=1)
-        self.window.grid_columnconfigure(2, weight=1)
-
-        # All grid rows should grow proportionally as well
-        self.window.grid_rowconfigure(0, weight=1)
-        self.window.grid_rowconfigure(1, weight=1)
-        self.window.grid_rowconfigure(2, weight=1)
-
-        self.update()
+        # Go to the next state, or loop back to zero if applicable
+        self.__state_index = (self.__state_index + 1) % len(self.__states)
+        new_state: State = self.__states[self.__state_index]
+        new_state.enter_state(self.__frame)
+        new_state.update(self.__frame)
 
     def update(self):
 
