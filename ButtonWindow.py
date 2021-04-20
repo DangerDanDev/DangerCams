@@ -1,6 +1,5 @@
 import tkinter
 
-
 class ButtonWindow:
     """
     A window that displays a clickable button that triggers display cycling
@@ -9,16 +8,16 @@ class ButtonWindow:
 
     __window: tkinter.Toplevel
 
-    __btn_next_camera: tkinter.Button
+    btn_next_camera: tkinter.Button
 
-    def __init__(self, parent: tkinter.Tk):
+    def __init__(self, parent: tkinter.Tk, btn_callback):
 
         self.__window = tkinter.Toplevel(parent)
 
-        self.__btn_next_camera = tkinter.Button(master=self.__window, text='Next camera', command=self.next_camera)
+        self.btn_next_camera = tkinter.Button(master=self.__window, text='Next camera', command=btn_callback)
         self.__window.grid_rowconfigure(0, weight=1)
         self.__window.grid_columnconfigure(0, weight=1)
-        self.__btn_next_camera.grid(row=0, column=0)
+        self.btn_next_camera.grid(row=0, column=0)
 
         self.__window.mainloop()
 

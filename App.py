@@ -16,9 +16,12 @@ class App:
     # A list of camera manager states
     __states = []
 
-    __frame = tkinter.Frame(window)
+    __frame = tkinter.Frame(window, width=640, height=480)
 
     __states = list()
+
+    def next_camera(self):
+        self.state.enter_state(self.__frame)
 
     def __init__(self):
 
@@ -31,14 +34,15 @@ class App:
         self.window.grid_rowconfigure(0, weight=1)
         self.window.grid_columnconfigure(0, weight=1)
 
-        state = SingleCameraState(r'C:\Users\scyth\Pictures\image.png')
-        state.enter_state(self.__frame)
 
         self.__frame.grid(row=0,column=0)
         self.__frame.grid_columnconfigure(0, weight=1)
         self.__frame.grid_rowconfigure(0, weight=1)
 
-        self.buttonWindow = ButtonWindow(self.window.master)
+        self.state = SingleCameraState(r'C:\Users\scyth\Pictures\image.png')
+        self.state.enter_state(self.__frame)
+
+        self.buttonWindow = ButtonWindow(self.window.master, btn_callback=self.next_camera)
         self.window.mainloop()
 
     def config_4_cameras(self):

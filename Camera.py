@@ -36,12 +36,12 @@ class Camera:
         
         if width == -1:
             self.set_width(self.input_source.get(cv.CAP_PROP_FRAME_WIDTH))
-        else:
+        else: # If we have a width passed in, use it!
             self.set_width(width)
                       
         if height == -1:
             self.set_height(self.input_source.get(cv.CAP_PROP_FRAME_HEIGHT))
-        else:
+        else: # If we have a height passed in, use it
             self.set_height(height)
 
     def __del__(self):
