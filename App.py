@@ -6,9 +6,19 @@ import CameraCanvas
 from Camera import Camera
 
 from ButtonWindow import ButtonWindow
+from states.SingleCameraState import SingleCameraState
+
 
 class App:
+
     window: tkinter.Tk = tkinter.Tk()
+
+    # A list of camera manager states
+    __states = []
+
+    __frame = tkinter.Frame(window)
+
+    __states = list()
 
     def __init__(self):
 
@@ -18,7 +28,20 @@ class App:
         # Set the title and size of the window
         self.window.geometry('640x480')
         self.window.title('DANGER Cams')
+        self.window.grid_rowconfigure(0, weight=1)
+        self.window.grid_columnconfigure(0, weight=1)
 
+        state = SingleCameraState(r'C:\Users\scyth\Pictures\image.png')
+        state.enter_state(self.__frame)
+
+        self.__frame.grid(row=0,column=0)
+        self.__frame.grid_columnconfigure(0, weight=1)
+        self.__frame.grid_rowconfigure(0, weight=1)
+
+        self.buttonWindow = ButtonWindow(self.window.master)
+        self.window.mainloop()
+
+    def config_4_cameras(self):
         self.cameras = list()
         self.camera_canvases = list()
 
@@ -46,11 +69,6 @@ class App:
         self.window.grid_rowconfigure(2, weight=1)
 
         self.update()
-
-        self.buttonWindow = ButtonWindow(self.window.master)
-        self.window.mainloop()
-
-
 
     def update(self):
 
