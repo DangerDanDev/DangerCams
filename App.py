@@ -56,6 +56,9 @@ class App:
         self.__states.append(SingleCameraState(frame=self.__frame, source=r'C:\Users\scyth\Videos\video2.mp4',
                                                width=640, height=480))
     def init_cameras(self):
+        # print valid indices
+
+
         self.__states.append(SingleCameraState(frame=self.__frame, source=0, width=640, height=480))
         self.__states.append(SingleCameraState(frame=self.__frame, source=1, width=640, height=480))
 

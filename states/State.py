@@ -49,7 +49,7 @@ class State:
         """
         pass
 
-    def override_on(self, frame: tkinter.Frame):
+    def override_on(self):
         """
         NOT IMPLEMENTED YET.
         Should use rasberry Pi interface to turn on the car screen override toggle,
@@ -59,7 +59,7 @@ class State:
         """
         pass
 
-    def override_off(self, frame: tkinter.Frame):
+    def override_off(self):
         """
         NOT IMPLENTED YET
         Will use Rasberry Pi interface to turn off the screen override, allowing the car to show the regular backup camera
