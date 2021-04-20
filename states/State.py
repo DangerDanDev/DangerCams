@@ -4,14 +4,20 @@ class State:
     """
     A base class for program states. States determine
     """
+
+    def is_in_state(self) -> bool:
+        return self.__in_state
+
     def __init__(self):
-        pass
+        self.__in_state = False
 
     def enter_state(self, frame: tkinter.Frame):
         frame.update()
 
+        self.__in_state = True
+
     def exit_state(self, frame: tkinter.Frame):
-        pass
+        self.__in_state = False
 
     def update(self, frame: tkinter.Frame):
         frame.update()

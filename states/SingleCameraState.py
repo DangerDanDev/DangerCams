@@ -9,6 +9,7 @@ class SingleCameraState(State):
     __canvas: CameraCanvas
     __camera: Camera
 
+
     def __init__(self, frame, source: str, width, height):
         State()
 
@@ -24,11 +25,15 @@ class SingleCameraState(State):
         self.update(frame)
 
     def update(self, frame: tkinter.Frame):
+        State.update(self, frame=frame)
+
         self.__canvas.update()
 
-        frame.after(10, lambda: self.update(frame))
+        if self.is_in_state():
+            frame.after(10, lambda: self.update(frame))
 
 
     def exit_state(self, frame: tkinter.Frame):
         State.exit_state(self, frame)
         self.__canvas.grid_forget()
+        self.__in_state = False

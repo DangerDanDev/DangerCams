@@ -36,13 +36,12 @@ class App:
         self.window.grid_rowconfigure(0, weight=1)
         self.window.grid_columnconfigure(0, weight=1)
 
-
         self.__frame.grid(row=0,column=0)
         self.__frame.grid_columnconfigure(0, weight=1)
         self.__frame.grid_rowconfigure(0, weight=1)
 
         self.__states.append(SingleCameraState(frame=self.__frame,source=r'C:\Users\scyth\Videos\video1.mp4',
-                                        width=640, height = 480))
+                                        width = 640, height = 480))
 
         self.__states.append(SingleCameraState(frame=self.__frame, source=r'C:\Users\scyth\Videos\video2.mp4',
                                                width=640, height=480))
@@ -64,20 +63,3 @@ class App:
         new_state: State = self.__states[self.__state_index]
         new_state.enter_state(self.__frame)
         new_state.update(self.__frame)
-
-    def update(self):
-
-        # If the window is not open, we do not want to update the
-        # canvases or the video streams
-        if not self.window.winfo_exists():
-            return
-
-        for canvas in self.camera_canvases:
-            canvas.update()
-
-        self.window.after(self.delay, self.update)
-
-    def add_camera(self, camera_input: str):
-        camera = Camera(camera_input)
-        self.cameras.append(camera)
-        self.camera_canvases.append(CameraCanvas.CameraCanvas(self.window, camera))
