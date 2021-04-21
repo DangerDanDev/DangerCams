@@ -58,9 +58,8 @@ class App:
     def init_cameras(self):
         # print valid indices
 
-
-        self.__states.append(SingleCameraState(frame=self.__frame, source=0, width=640, height=480))
-        self.__states.append(SingleCameraState(frame=self.__frame, source=1, width=640, height=480))
+        for i in range(0,2):
+            self.__states.append(SingleCameraState(frame=self.__frame, source=i, width=640, height=480))
 
     def next_state(self):
 
